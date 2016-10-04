@@ -1,29 +1,29 @@
-CREATE DATABASE IF NOT EXISTS oakpark;
-USE oakpark;
+CREATE DATABASE IF NOT EXISTS APU;
+USE APU;
 
 DROP TABLE IF EXISTS People;
-CREATE TABLE People(PeopleID varchar(36) NOT NULL,
-LastName varchar(30), FirstName varchar(30), Gender char(1),
-AddressLine1 varchar(100), AddressLine2 varchar(100), 
-City varchar(30), State varchar(30), Zipcode varchar(30),
-Phone varchar(30), Email varchar(30), Wechat varchar(30),
-PRIMARY KEY (PeopleID));
+CREATE TABLE People(people_id binary(16) NOT NULL,
+last_name varchar(30), first_name varchar(30), gender char(1),
+address_line1 varchar(100), address_line2 varchar(100), 
+city varchar(30), state varchar(30), zipcode varchar(30),
+phone varchar(30), email varchar(30), wechat varchar(30),
+PRIMARY KEY (people_id));
 
 DROP TABLE IF EXISTS Driver;
-CREATE TABLE Driver(DriverID varchar(36) NOT NULL,
-PeopleID varchar(36) NOT NULL,
-VehicleMaker varchar(30), VehicleModel varchar(30), VehicleColor varchar(30),
-LicensePlate varchar(30),
-FOREIGN KEY DriverID(PeopleID)
-REFERENCES People(PeopleID)
+CREATE TABLE Driver(
+people_id binary(16) NOT NULL,
+vehicle_maker varchar(30), vehicle_model varchar(30), vehicle_color varchar(30),
+license_plate varchar(30),
+PRIMARY KEY (people_id),
+FOREIGN KEY (people_id) REFERENCES People(people_id)
 ON UPDATE CASCADE
 ON DELETE CASCADE);
 
 DROP TABLE IF EXISTS Passenger;
-CREATE TABLE Passenger(PassengerID varchar(36) NOT NULL,
-PeopleID varchar(36) NOT NULL,
-numberOfLuggage int(10),FlightNumber varchar(30),ArrivingDate DATE,
-FOREIGN KEY PassengerID(PeopleID)
-REFERENCES People(PeopleID)
+CREATE TABLE Passenger(people_id binary(16) NOT NULL,
+number_luggage int(10),flight_number varchar(30),arriving_date DATE,
+PRIMARY KEY (people_id),
+FOREIGN KEY (people_id) REFERENCES People(people_id)
 ON UPDATE CASCADE
 ON DELETE CASCADE);
+
