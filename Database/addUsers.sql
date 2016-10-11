@@ -44,4 +44,5 @@ VALUES (
 SELECT * from People;
 SELECT * from Driver;
 SELECT * from Passenger;
- 
+SELECT * from driver_passenger_link;
+
