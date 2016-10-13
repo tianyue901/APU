@@ -33,6 +33,16 @@ FOREIGN KEY (people_id) REFERENCES People(people_id)
 ON UPDATE CASCADE
 ON DELETE CASCADE);
 
+SET foreign_key_checks = 0;
+DROP TABLE IF EXISTS Agent;
+SET foreign_key_checks = 1;
+CREATE TABLE Agent(people_id binary(16) NOT NULL,
+username varchar(30), password varchar(30),
+PRIMARY KEY (people_id),
+FOREIGN KEY (people_id) REFERENCES People(people_id)
+ON UPDATE CASCADE
+ON DELETE CASCADE);
+
 DROP TABLE IF EXISTS driver_passenger_link;
 CREATE TABLE driver_passenger_link(link_id binary(16) NOT NULL,
 driver_id binary(16),
